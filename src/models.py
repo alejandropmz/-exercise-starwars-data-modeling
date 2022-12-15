@@ -14,7 +14,11 @@ class User(Base):
     name = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
     fav_planets = relationship('Fav_planets', backref='user', lazy=True)
-    fav_characters = relationship('Fav_planets', backref='user', lazy=True)
+    fav_characters = relationship('Fav_characters', backref='user', lazy=True)
+    fav_films = relationship('Fav_films', backref='user', lazy=True)
+    fav_vehicles = relationship('Fav_vehicles', backref='user', lazy=True)
+    fav_species = relationship('Fav_species', backref='user', lazy=True)
+    fav_starships = relationship('Fav_starships', backref='user', lazy=True)
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -32,7 +36,7 @@ class Films(Base):
     title = Column(String(300))
     episodie_id = Column(Integer)
     director = Column(String(300))
-    release_date = Column(String(300))
+    release_date = Column(Integer)
     fav_films = relationship('Fav_films', backref='user', lazy=True)
 
 class Vehicles(Base):
@@ -40,8 +44,8 @@ class Vehicles(Base):
     id = Column(Integer, primary_key=True)
     model = Column(String(250), nullable=False)
     vehicle_class = Column(String(300))
-    manufacturer = Column(Integer)
-    cargo_capacity = Column(String(300))
+    manufacturer = Column(String(300))
+    cargo_capacity = Column(Integer)
     release_date = Column(String(300))
     fav_vehicles = relationship('Fav_vehicles', backref='user', lazy=True)
 
@@ -53,7 +57,6 @@ class People(Base):
     skin_color = Column(Integer)
     eye_color = Column(String(300))
     gender = Column(String(300))
-    release_date = Column(String(300))
     fav_people = relationship('Fav_people', backref='user', lazy=True)
 
 class Starships(Base):
@@ -61,10 +64,9 @@ class Starships(Base):
     id = Column(Integer, primary_key=True)
     model = Column(String(250), nullable=False)
     starship_class = Column(String(300))
-    manufacturer = Column(Integer)
+    manufacturer = Column(String(300))
     lenght = Column(String(300))
-    cargo_capacity = Column(String(300))
-    release_date = Column(String(300))
+    cargo_capacity = Column(Integer)
     fav_starships = relationship('Fav_starships', backref='user', lazy=True)
 
 class Species(Base):
